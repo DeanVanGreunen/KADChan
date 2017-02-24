@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+    {% block title %}{{ project_info.name }} / {{ project_info.version }}-{{ project_info.version_release_phase }}{% endblock %}
+    {% block styling %}
+    <style type="text/css">
+    * { margin:0; padding:0; }
+    html, body { background-color: #0C0C0C; color: #FFFFFF; }
+    .project-info-listing {
+    }
+    .project-info-listing h1 {
+        background-color: #0099cc;
+        padding: 20px;
+    }
+    .project-info-listing div {
+        padding: 16px 20px;
+        display:block;
+    }
+    .info > span {
+        display:block;
+        padding:4px;
+        margin-left:8px;
+        padding-left:16px;
+    }
+    .social li {
+        display:block;
+        padding:4px;
+        margin-left:8px;
+        padding-left:16px;
+    }
+    </style>
+    {% endblock %}
+    {% block content %}
+        <div class="project-info-listing">
+            <h1>{{ project_info.name }}</h1>
+            <div>
+                <h4>App Links:</h4>
+                <li style="list-style:none;margin:8px;padding-left:16px;"><a style="color:lime;" target="_blank" href="/dashboard">Dashboard</a><span style="color:grey;padding-left:100px;"># Pretty Dashboard</span></li>
+                <li style="list-style:none;margin:8px;padding-left:32px;">&gt; <a style="color:lime;" target="_blank" href="/todo">To Do List</a><span style="color:grey;padding-left:72px;"># Whats Next</span></li>
+               	<li style="list-style:none;margin:8px;padding-left:32px;">&gt; <a style="color:lime;" target="_blank" href="/downloads">Current Downloads</a><span style="color:grey;padding-left:16px;"># Whats Do We Have</span></li>
+                <li style="list-style:none;margin:8px;padding-left:32px;">&gt; <a style="color:lime;" target="_blank" href="/updates">Latest Updates</a><span style="color:grey;padding-left:46px;"># Whats New</span></li>
+                <li style="list-style:none;margin:8px;padding-left:32px;">&gt; <a style="color:lime;" target="_blank" href="/watched">Watched</a><span style="color:grey;padding-left:86px;"># What I Have Seen</span></li>
+                <li style="list-style:none;margin:8px;padding-left:32px;">&gt; <a style="color:lime;" target="_blank" href="/watching">Watching</a><span style="color:grey;padding-left:80px;"># What I Am Watching</span></li>
+                <li style="list-style:none;margin:8px;padding-left:32px;">&gt; <a style="color:lime;" target="_blank" href="/settings">Settings</a><span style="color:grey;padding-left:90px;"># Manage App Settings</span></li>
+                <li style="list-style:none;margin:8px;padding-left:32px;">&gt; <a style="color:lime;" target="_blank" href="/api">Dev API</a><span style="color:grey;padding-left:84px;"># Awesome Programming Interface</span></li>
+            </div>
+            <div class="info">
+                <h4>Project Info</h4>
+                <span>Project Name: <span style="color:lime;">{{ project_info.name }}</span></span>
+                <span>Project Version: <span style="color:lime;">{{ project_info.version }}</span>-<span style="color:{% if project_info.version_release_phase == 'alpha' %}lime{% endif %}{% if project_info.version_release_phase == 'beta' %}blue{% endif %}{% if project_info.version_release_phase == 'charlie' %}orange{% endif %}{% if project_info.version_release_phase == 'development' %}red{% endif %};">{{ project_info.version_release_phase }}</span></span>
+                <span>Author: <a style="color:lime;" target="_blank" href="mailto:{{ project_info.email }}">{{ project_info.author }}</a></span>
+                <span>Git Repo: <a style="color:lime;" target="_blank" href="{{ project_info.repo }}">@DeanVanGreunen/KADChan</a></span>
+                <span>License: <a target="_blank" style="color:lime;" href="{{ project_info.license_url }}">{{ project_info.license }}</a></span>
+            </div>
+            <div class="social""">
+                <h4>Social Links, Follow me on:</h4>
+                {% for social_name,social_link in project_info.social.items %}
+                    <li><a style="color:lime;" target="_blank" href="{{ social_link }}">{{ social_name }}</a></li>
+                {% endfor %}
+            </div>
+        </div>
+    {% endblock %}
+    {% block javascript %}
+    {% endblock %}
